@@ -12,18 +12,23 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Show Files (Debug)
+        run: |
+          pwd
+          ls -la
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build Docker Image
         run: docker build -t sara735/myapp:${{ github.ref_name }} .
-        
 
       - name: Push Docker Image
-        run: docker push sara735/myapp:${{ github.ref_name }} 
+        run: docker push sara735/myapp:${{ github.ref_name }}
+
 
