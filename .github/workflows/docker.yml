@@ -22,6 +22,7 @@ jobs:
 
       - name: Build Docker Image
         run: docker build -t sara735/myapp:${{ github.ref_name }} .
+        
 
       - name: Push Docker Image
         run: docker push sara735/myapp:${{ github.ref_name }} 
